@@ -21,16 +21,6 @@ from .discord_api import (
 # ---------- APP ----------
 app = FastAPI(title="Chaistreet API")
 
-@app.options("/{path:path}")
-def preflight_handler(path: str, request: Request):
-    return Response(
-        status_code=200,
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
-            "Access-Control-Allow-Headers": "*",
-        },
-    )
 
 
 print("CORS FRONTEND_URL =", FRONTEND_URL)  # debug (remove later)
@@ -38,8 +28,10 @@ print("CORS FRONTEND_URL =", FRONTEND_URL)  # debug (remove later)
 # ---------- CORS (FINAL FIX) ----------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],        # ✅ allow all
-    allow_credentials=False,    # ✅ required with "*"
+    allow_origins=[
+        "https://chai-street.vercel.app",   # frontend
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
