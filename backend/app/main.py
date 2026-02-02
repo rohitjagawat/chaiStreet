@@ -36,7 +36,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+ 
 # ---------- AUTH ----------
 # 🔥 IMPORTANT: auto_error=False to allow OPTIONS (preflight)
 auth_scheme = HTTPBearer(auto_error=False)
