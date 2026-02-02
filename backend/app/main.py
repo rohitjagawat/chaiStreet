@@ -27,6 +27,8 @@ from .discord_api import (
     add_to_guild,
 )
 
+print("CORS FRONTEND_URL =", FRONTEND_URL)  # debug, keep for now
+
 # ---------- ENV ----------
 
 # print("ENV CHECK CLIENT ID:", os.getenv("DISCORD_CLIENT_ID"))
@@ -42,8 +44,11 @@ app = FastAPI(title="Chaistreet API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_URL],
-    allow_credentials=True,
+    allow_origins=[
+        "https://chai-street.vercel.app",
+        FRONTEND_URL,
+    ],
+    allow_credentials=False,   # ✅ IMPORTANT
     allow_methods=["*"],
     allow_headers=["*"],
 )
